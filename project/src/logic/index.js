@@ -8,6 +8,7 @@ A game is an object with...
   - 'plr1won': Game over, the first player won
   - 'plr2won': Game over, the second player won
   - 'draw': Game over, nobody won
+
 - board: An array of 9 numbers, each of which are either:
   - 0: An empty square
   - 1: Player 1 has a marker here
@@ -29,8 +30,9 @@ The board array goes from top left to bottom right. For example, the array
 /*
 The newGame function will return a valid new game object.
 */
+
 export const newGame = () => ({
-  state: 'plr1',
+  player: 'plr1',
   board: [0,0,0,0,0,0,0,0,0],
   line: []
 });
@@ -46,5 +48,17 @@ an unchanged game will be returned.
 */
 
 export const makeMove = (game, pos) => {
-  // ...to be implemented!
-}
+    // ...to be implemented!
+    const currentPlayer = game.player === 'plr1' ? 1 : 2;
+    const newBoard = game.board.map((tile, index) => pos === index ? currentPlayer : tile);
+    return {board: newBoard, player: game.player === 'plr1' ? 'plr2' : 'plr1', line:[]};
+
+};
+
+/*export const didIWin = (game, pos) => {
+    const currentPlayer = game.player;
+    const winPatterns = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+    const currentPlayerTiles = game.board.filter((tile, index) => currentPlayer
+
+};*/

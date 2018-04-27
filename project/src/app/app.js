@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {makeMove, newGame} from '../logic';
+import {makeMove, newGame, gameMessage} from '../logic';
 
 import Message from './message';
 import Tile from './tile';
@@ -19,9 +19,38 @@ and all tiles in an element with a `board` CSS class.
 */
 
 export default class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            game: newGame()
+        }
+}
+    playerMove(i, value){
+        if (value === 1 || value === 2) return;
+
+        const newState = makeMove(this.state.game, i);
+        this.setState({ game: newState });
+    }
+
+    resetGame() {
+        this.setState(this.state.game = newGame());
+    }
+
+
   render(){
     return (
-      <div>To be implemented...</div>
+        <div className="container">
+            <div className="board">
+                {this.state.game.board.map((tile, index) => (
+                    <Tile key={index} value={tile} move={() => this.playerMove(index, tile)}/>
+                ))}
+            </div>
+            <div className="messageBoard">
+                <Message />
+            <button onClick={() => this.resetGame()}>Reset</button>
+            </div>
+        </div>
+
     );
   }
 }
