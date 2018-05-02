@@ -46,7 +46,7 @@ export default class App extends React.Component {
                 ))}
             </div>
             <div className="messageBoard">
-                <Message />
+                <Message showMessage={this.state.game}/>
             <button onClick={() => this.resetGame()}>Reset</button>
             </div>
         </div>

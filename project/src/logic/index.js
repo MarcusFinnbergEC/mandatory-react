@@ -32,9 +32,10 @@ The newGame function will return a valid new game object.
 */
 
 export const newGame = () => ({
-  player: 'plr1',
-  board: [0,0,0,0,0,0,0,0,0],
-  line: []
+    winner: 0,
+    player: 'plr1',
+    board: [0,0,0,0,0,0,0,0,0],
+    line: []
 });
 
 /*
@@ -51,7 +52,11 @@ export const makeMove = (game, pos) => {
     // ...to be implemented!
     const currentPlayer = game.player === 'plr1' ? 1 : 2;
     const newBoard = game.board.map((tile, index) => pos === index ? currentPlayer : tile);
-    return {board: newBoard, player: game.player === 'plr1' ? 'plr2' : 'plr1', line:[]};
+    const winPatterns = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+    const playerWon = newBoard.map(currentPlayer).match(winPatterns);
+    console.log(game.board + " " + " "  + game.player + " " + " " + newBoard + " " + " " +currentPlayer);
+    return {winner: playerWon === true ? currentPlayer : 0, board: newBoard, player: game.player === 'plr1' ? 'plr2' : 'plr1', line:[]};
+
 
 };
 
