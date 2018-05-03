@@ -55,13 +55,9 @@ export const makeMove = (game, pos) => {
     const currentPlayer = game.player === 'plr1' ? 1 : 2;
     const newBoard = game.board.map((tile, index) => pos === index ? currentPlayer : tile);
     const winPatterns = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
-    const winpath = winPatterns.find(pathern => pathern.every(value => newBoard[value] === currentPlayer));
-    const winner = !!winpath ? currentPlayer : 0;
-    console.log('x', winpath);
-
-
-    console.log(game.board + " " + " "  + game.player + " " + " " + newBoard + " " + " " +currentPlayer + " " + winner);
-    return {winner, board: newBoard, player: game.player === 'plr1' ? 'plr2' : 'plr1', line:winpath};
+    const winPath = winPatterns.find(pattern => pattern.every(value => newBoard[value] === currentPlayer));
+    const winner = !!winPath ? currentPlayer : 0;
+    return {winner, board: newBoard, player: game.player === 'plr1' ? 'plr2' : 'plr1', line: !!winPath && winPath.length > 0 ? winPath : []};
 };
 
 

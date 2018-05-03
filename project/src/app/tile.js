@@ -13,24 +13,29 @@ The tile should render with the classes...
 - plr2: if has a plr2 piece
 - line: if it was part of a winning line (STRETCH TASK)
 */
-
 import React from 'react';
 
 export default function Tile(props){
     let tileOptions;
 
-    switch(props.value){
+    switch(props.value /*|| props.winningLine*/){
         case 1:
             tileOptions = { className: 'tile plr1', text: 'X' };
             break;
             case 2:
             tileOptions = { className: 'tile plr2', text: 'O' };
             break;
-        default:
+            default:
             tileOptions = { className: 'tile', text: '' };
             break;
     }
+    /*if(props.winningLine) {
+        return(
+        )
+    }*/
+    console.log(props);
+
   return (
-    <div className={tileOptions.className} onClick={() => props.move()}>{tileOptions.text}</div>
+    <div className={props.win ? `${tileOptions.className} line` : tileOptions.className} onClick={() => props.move()}>{tileOptions.text}</div>
   );
 }
