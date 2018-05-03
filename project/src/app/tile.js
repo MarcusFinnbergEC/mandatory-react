@@ -18,7 +18,7 @@ import React from 'react';
 export default function Tile(props){
     let tileOptions;
 
-    switch(props.value /*|| props.winningLine*/){
+    switch(props.value){
         case 1:
             tileOptions = { className: 'tile plr1', text: 'X' };
             break;
@@ -29,11 +29,6 @@ export default function Tile(props){
             tileOptions = { className: 'tile', text: '' };
             break;
     }
-    /*if(props.winningLine) {
-        return(
-        )
-    }*/
-    console.log(props);
 
   return (
     <div className={props.win ? `${tileOptions.className} line` : tileOptions.className} onClick={() => props.move()}>{tileOptions.text}</div>
